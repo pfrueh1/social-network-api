@@ -11,9 +11,12 @@ router.get('/', (req, res) => {
 
 router.get('/:id', ({params}, res) => {
     User.findOne({ _id: params.id})
+    .populate({        
+        path: 'friends',
+        select: '-__v'
+    })
     .populate({
         path: 'thoughts',
-        path: 'friends',
         select: '-__v'
     })
     .select('-__v')
